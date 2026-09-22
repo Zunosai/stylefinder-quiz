@@ -13,6 +13,9 @@ export default function AdminDashboard() {
   const [searchEmail, setSearchEmail] = useState('');
   const [selectedSubmission, setSelectedSubmission] = useState<DbQuizSubmission | null>(null);
   const [showDetails, setShowDetails] = useState(false);
+  // Submission ids with a Blueprint generation in flight. Generation runs at
+  // high effort and can take over a minute, so the row must show progress.
+  const [generatingIds, setGeneratingIds] = useState<Set<string>>(new Set());
 
   // Check authentication
   const authenticate = async () => {
@@ -97,6 +100,62 @@ export default function AdminDashboard() {
     } catch (error) {
       console.error('Retry failed:', error);
       alert('Error retrying email');
+    }
+  };
+
+  // Generate a StyleFinder ID Signature Style Blueprint and email it to her.
+  // The click is the approval — there is no separate review step.
+  const generateBlueprint = async (submission: DbQuizSubmission) => {
+    const id = submission.id;
+    if (!id) return;
+
+    const confirmed = confirm(
+      `Generate a Blueprint for ${submission.user_name} and email it to ` +
+        `${submission.user_email}?\n\nThis takes up to two minutes.`
+    );
+    if (!confirmed) return;
+
+    setGeneratingIds((prev) => new Set(prev).add(id));
+
+    try {
+      const response = await fetch('/api/admin/blueprint', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${adminToken}`
+        },
+        body: JSON.stringify({ submissionId: id })
+      });
+
+      const result = await response.json();
+
+      if (!response.ok) {
+        alert(`Blueprint failed: ${result.error ?? 'Unknown error'}`);
+        return;
+      }
+
+      if (result.emailed) {
+        alert(
+          `Blueprint sent to ${submission.user_email}.` +
+            (result.archetype ? `\n\nArchetype: ${result.archetype}` : '')
+        );
+      } else {
+        // Saved but not delivered — say so rather than reporting success.
+        alert(
+          `Blueprint generated and saved, but the email did not send: ` +
+            `${result.emailError ?? 'unknown reason'}.\n\n` +
+            `View it at /blueprint/${result.blueprintId}`
+        );
+      }
+    } catch (error) {
+      console.error('Blueprint generation failed:', error);
+      alert('Error generating Blueprint');
+    } finally {
+      setGeneratingIds((prev) => {
+        const next = new Set(prev);
+        next.delete(id);
+        return next;
+      });
     }
   };
 
@@ -268,6 +327,15 @@ export default function AdminDashboard() {
                               Retry
                             </button>
                           )}
+                          <button
+                            onClick={() => generateBlueprint(submission)}
+                            disabled={generatingIds.has(submission.id ?? '')}
+                            className="text-rose-600 hover:text-rose-800 disabled:cursor-not-allowed disabled:text-gray-400"
+                          >
+                            {generatingIds.has(submission.id ?? '')
+                              ? 'Generating…'
+                              : 'Blueprint'}
+                          </button>
                         </div>
                       </td>
                     </tr>

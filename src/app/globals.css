@@ -24,3 +24,60 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+/* ---------------------------------------------------------------------------
+   StyleFinder ID® Blueprint
+   Typography for the generated document. The markup comes from
+   renderBlueprintHtml(), so these are plain element selectors scoped to the
+   .blueprint-body wrapper. Pinned light: it is a print document, and the
+   dark-mode block above would otherwise invert it mid-page.
+   --------------------------------------------------------------------------- */
+.blueprint-body h3 {
+  margin: 2.5rem 0 0.75rem;
+  padding-bottom: 0.4rem;
+  border-bottom: 1px solid #f0e3e8;
+  color: #9c5c74;
+  font-size: 0.95rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.blueprint-body h4 {
+  margin: 1.75rem 0 0.4rem;
+  color: #1f1f1f;
+  font-size: 1.02rem;
+  font-weight: 600;
+}
+
+.blueprint-body p {
+  margin: 0 0 1rem;
+}
+
+.blueprint-body ul {
+  margin: 0 0 1.25rem;
+  padding-left: 1.25rem;
+  list-style: disc;
+}
+
+.blueprint-body li {
+  margin-bottom: 0.5rem;
+}
+
+.blueprint-body strong {
+  font-weight: 600;
+  color: #1f1f1f;
+}
+
+.blueprint-body hr {
+  margin: 2.5rem 0;
+  border: 0;
+  border-top: 1px solid #f0e3e8;
+}
+
+@media print {
+  .blueprint-body h3,
+  .blueprint-body h4 {
+    break-after: avoid;
+  }
+}

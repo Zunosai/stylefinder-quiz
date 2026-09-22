@@ -11,7 +11,7 @@ import { ButtonLoading } from '@/components/SkeletonLoader';
  * wording change cannot retroactively redefine what past takers agreed to.
  * BUMP THIS whenever the privacy notice text changes.
  */
-export const CONSENT_VERSION = '2026-08-04-retailer-sharing';
+export const CONSENT_VERSION = '2026-09-22-blueprint-ai';
 
 const userInfoSchema = z.object({
   userName: z.string()
@@ -157,10 +157,12 @@ export default function UserInfoForm({ onSubmit, initialValues }: UserInfoFormPr
                 <p className="font-medium mb-1">Privacy &amp; Data Use</p>
                 <p>
                   Your information is used for this assessment and shared with your
-                  personal style coach for guidance. If you opt in above, your style
-                  result is also made available to boutiques you already shop with —
-                  never to businesses you have no relationship with, and we never sell
-                  your data. You can withdraw consent at any time by contacting us.
+                  personal style coach for guidance. We use a secure AI service to help
+                  write your personalized Style Blueprint from your results. If you opt
+                  in above, your style result is also made available to boutiques you
+                  already shop with — never to businesses you have no relationship
+                  with, and we never sell your data. You can withdraw consent at any
+                  time by contacting us.
                 </p>
               </div>
             </div>
