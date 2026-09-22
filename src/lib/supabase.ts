@@ -41,6 +41,11 @@ export interface DbQuizSubmission {
   ip_address?: string | null;
   user_agent?: string | null;
   session_id?: string | null;
+  /** See migration 002. NULL = never asked; only `true` permits retailer outreach. */
+  share_with_retailers?: boolean | null;
+  consent_version?: string | null;
+  referral_store_id?: string | null;
+  referral_source?: string | null;
 }
 
 export interface DbEmailQueue {
@@ -110,7 +115,16 @@ export async function saveQuizSubmission(
       email_sent: false,
       ip_address,
       user_agent,
-      session_id: `session_${Date.now()}_${Math.random().toString(36).substring(2)}`
+      session_id: `session_${Date.now()}_${Math.random().toString(36).substring(2)}`,
+      // Consent is recorded EXACTLY as given. `undefined` means the taker was
+      // never asked (e.g. a client on the pre-2026-08-04 build) and must persist
+      // as NULL, not false and never true — see migration 002.
+      share_with_retailers: typeof submission.shareWithRetailers === 'boolean'
+        ? submission.shareWithRetailers
+        : null,
+      consent_version: submission.consentVersion ?? null,
+      referral_store_id: submission.referralStoreId ?? null,
+      referral_source: submission.referralSource ?? null
     };
 
     // Insert submission

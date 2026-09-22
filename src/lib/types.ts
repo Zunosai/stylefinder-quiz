@@ -21,6 +21,17 @@ export interface QuizSubmission {
   section1: Section1Response;
   section2: Section2Response;
   timestamp: Date;
+  /**
+   * Consent to share this SFID with boutiques she shops with. Undefined means
+   * "never asked" — treat as NOT consented; never coerce it to true.
+   */
+  shareWithRetailers?: boolean;
+  /** Identifier of the consent copy shown at capture. */
+  consentVersion?: string;
+  /** BHOS shops.id of the boutique that drove this take (?store=). Attribution only. */
+  referralStoreId?: string;
+  /** Campaign/source tag (?src=). */
+  referralSource?: string;
 }
 
 export interface StyleScore {

@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation';
 import { QuizSubmission } from '@/lib/types';
 import { QuizStorage, useQuizStorage, type QuizStep } from '@/lib/storage';
 import { logger } from '@/lib/logger';
-import UserInfoForm from '@/components/UserInfoForm';
+import UserInfoForm, { CONSENT_VERSION } from '@/components/UserInfoForm';
 import QuizSection1 from '@/components/QuizSection1';
 import QuizSection2 from '@/components/QuizSection2';
 import AutoSaveIndicator from '@/components/AutoSaveIndicator';
@@ -28,7 +28,22 @@ export default function QuizPage() {
       try {
         // Clean up any old or expired data
         QuizStorage.cleanup();
-        
+
+        // Capture store attribution from the URL (?store=&src=). Read straight
+        // off window.location rather than useSearchParams so this client page
+        // does not need a Suspense boundary. Attribution only — it does not
+        // grant the referring store any ownership of the submission.
+        const params = new URLSearchParams(window.location.search);
+        const referralStoreId = params.get('store') || undefined;
+        const referralSource = params.get('src') || undefined;
+        if (referralStoreId || referralSource) {
+          setQuizData(prev => ({ ...prev, referralStoreId, referralSource }));
+          logger.info('quiz', 'Referral attribution captured', {
+            referralStoreId,
+            referralSource
+          });
+        }
+
         logger.info('quiz', 'Quiz initialized');
       } catch (error: any) {
         logger.error('quiz', 'Error initializing quiz', { error: error.message });
@@ -61,14 +76,27 @@ export default function QuizPage() {
   }, [quizData, currentStep, isInitialized, storage]);
 
 
-  const handleUserInfoSubmit = (userInfo: { userName: string; userEmail: string }) => {
-    const updatedData = { ...quizData, ...userInfo };
+  const handleUserInfoSubmit = (userInfo: {
+    userName: string;
+    userEmail: string;
+    shareWithRetailers: boolean;
+  }) => {
+    const updatedData = {
+      ...quizData,
+      ...userInfo,
+      consentVersion: CONSENT_VERSION
+    };
     setQuizData(updatedData);
     setCurrentStep('section1');
-    
-    // Auto-save user info immediately
+
+    // Auto-save user info immediately. Consent is deliberately NOT persisted to
+    // local storage — it is re-affirmed on the form rather than resurrected from
+    // a stale draft.
     storage.autoSave({
-      userData: userInfo,
+      userData: {
+        userName: userInfo.userName,
+        userEmail: userInfo.userEmail
+      },
       quizProgress: {
         currentStep: 'section1',
         section1: {},
@@ -111,7 +139,13 @@ export default function QuizPage() {
       section2: section2Data,
       userName: quizData.userName!,
       userEmail: quizData.userEmail!,
-      timestamp: new Date()
+      timestamp: new Date(),
+      // Carried from the consent checkbox; stays undefined if never answered so
+      // the server records NULL ("never asked") rather than a fabricated false.
+      shareWithRetailers: quizData.shareWithRetailers,
+      consentVersion: quizData.consentVersion,
+      referralStoreId: quizData.referralStoreId,
+      referralSource: quizData.referralSource
     };
 
     setCurrentStep('submitting');

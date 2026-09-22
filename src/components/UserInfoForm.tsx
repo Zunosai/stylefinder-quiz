@@ -6,6 +6,13 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { ButtonLoading } from '@/components/SkeletonLoader';
 
+/**
+ * Identifier for the consent copy below. Stored on every submission so a future
+ * wording change cannot retroactively redefine what past takers agreed to.
+ * BUMP THIS whenever the privacy notice text changes.
+ */
+export const CONSENT_VERSION = '2026-08-04-retailer-sharing';
+
 const userInfoSchema = z.object({
   userName: z.string()
     .min(2, 'Name must be at least 2 characters')
@@ -14,6 +21,9 @@ const userInfoSchema = z.object({
   userEmail: z.string()
     .email('Please enter a valid email address')
     .max(100, 'Email must be less than 100 characters'),
+  // Opt-OUT: defaults to true so the box is pre-checked, and she can clear it.
+  // Flip `defaultValues.shareWithRetailers` to false below for opt-IN instead.
+  shareWithRetailers: z.boolean(),
 });
 
 type UserInfoFormData = z.infer<typeof userInfoSchema>;
@@ -33,7 +43,9 @@ export default function UserInfoForm({ onSubmit, initialValues }: UserInfoFormPr
   } = useForm<UserInfoFormData>({
     resolver: zodResolver(userInfoSchema),
     mode: 'onChange',
-    defaultValues: initialValues || {}
+    // Pre-checked (opt-out). Set to false to make retailer sharing opt-IN —
+    // the more conservative posture, at some cost to consent rate.
+    defaultValues: { shareWithRetailers: true, ...(initialValues || {}) }
   });
 
   const onFormSubmit = async (data: UserInfoFormData) => {
@@ -113,6 +125,28 @@ export default function UserInfoForm({ onSubmit, initialValues }: UserInfoFormPr
             )}
           </div>
 
+          {/* Retailer sharing consent */}
+          <div className="bg-rose-50 rounded-lg p-4">
+            <label htmlFor="shareWithRetailers" className="flex items-start cursor-pointer">
+              <input
+                {...register('shareWithRetailers')}
+                type="checkbox"
+                id="shareWithRetailers"
+                className="mt-0.5 mr-3 h-4 w-4 flex-shrink-0 rounded border-gray-300 text-rose-600 focus:ring-rose-500"
+                disabled={isSubmitting}
+              />
+              <span className="text-xs text-gray-700">
+                <span className="block font-medium mb-1">
+                  Get recommendations from boutiques you shop
+                </span>
+                Share my StyleFinder ID® with boutiques I already shop with, so they can
+                show me pieces suited to my style. They only see my style result — never
+                my quiz answers. Uncheck this and your results stay between you and your
+                style coach.
+              </span>
+            </label>
+          </div>
+
           {/* Privacy Notice */}
           <div className="bg-gray-50 rounded-lg p-4">
             <div className="flex items-start">
@@ -120,11 +154,13 @@ export default function UserInfoForm({ onSubmit, initialValues }: UserInfoFormPr
                 <path fillRule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clipRule="evenodd" />
               </svg>
               <div className="text-xs text-gray-600">
-                <p className="font-medium mb-1">Privacy & Data Use</p>
+                <p className="font-medium mb-1">Privacy &amp; Data Use</p>
                 <p>
-                  Your information is used solely for this assessment and will be shared 
-                  with your assigned style coach for personalized guidance. We respect 
-                  your privacy and do not share your data with third parties.
+                  Your information is used for this assessment and shared with your
+                  personal style coach for guidance. If you opt in above, your style
+                  result is also made available to boutiques you already shop with —
+                  never to businesses you have no relationship with, and we never sell
+                  your data. You can withdraw consent at any time by contacting us.
                 </p>
               </div>
             </div>

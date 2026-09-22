@@ -1,6 +1,28 @@
 import Link from 'next/link';
 
-export default function HomePage() {
+/**
+ * Attribution params are carried from the landing page into the quiz so a
+ * boutique that drives a take gets credit for it. SFID stays TBH-branded —
+ * this is referral attribution, NOT a white-labeled per-store quiz.
+ */
+function buildQuizHref(searchParams: Record<string, string | string[] | undefined>): string {
+  const params = new URLSearchParams();
+  for (const key of ['store', 'src'] as const) {
+    const raw = searchParams[key];
+    const value = Array.isArray(raw) ? raw[0] : raw;
+    if (value) params.set(key, value);
+  }
+  const qs = params.toString();
+  return qs ? `/quiz?${qs}` : '/quiz';
+}
+
+export default async function HomePage({
+  searchParams,
+}: {
+  searchParams: Promise<Record<string, string | string[] | undefined>>;
+}) {
+  const quizHref = buildQuizHref(await searchParams);
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-rose-50 via-white to-purple-50 flex items-center justify-center p-4">
       <div className="max-w-2xl mx-auto text-center">
@@ -40,14 +62,16 @@ export default function HomePage() {
           {/* CTA Button */}
           <div className="space-y-4">
             <Link
-              href="/quiz"
+              href={quizHref}
               className="inline-block w-full bg-gradient-to-r from-rose-500 to-pink-600 text-white font-semibold py-4 px-8 rounded-xl hover:from-rose-600 hover:to-pink-700 transform hover:scale-[1.02] transition-all duration-200 shadow-lg"
             >
               Start Your Style Assessment
             </Link>
-            
+
             <p className="text-xs text-gray-500">
-              By proceeding, you agree to share your results with your assigned style coach for personalized guidance.
+              By proceeding, you agree to share your results with your assigned style coach
+              for personalized guidance. On the next step you can also choose to share your
+              style result with boutiques you already shop with.
             </p>
           </div>
         </div>
