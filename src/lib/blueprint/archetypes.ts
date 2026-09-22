@@ -8,18 +8,17 @@
  * (The Spirited) are different archetypes. The first name is always Primary.
  *
  * Source: the per-archetype reference documents, each of which states its own
- * pairing and name. Those files are authoritative over the summary list in the
- * Blueprint brief and over "The Archetypes" one-pager, which disagree with them
- * in two places:
+ * pairing and name.
  *
- *   Contemporary/Natural — both list "The Green Gal"; the archetype's own
- *   document is titled "The Polished". Using the document's name.
+ * Three archetypes were renamed over the years, and some older summary
+ * documents still carry the retired name. The names below are the current
+ * ones, confirmed by Jim on 2026-09-22:
  *
- *   Romantic/Sporty — the one-pager lists "The Enchantress"; the archetype's
- *   own document is titled "The Flirt", matching the brief. Using "The Flirt".
+ *   Contemporary/Natural — The Polished, formerly "The Green Gal"
+ *   Romantic/Sporty      — The Flirt, formerly "The Enchantress"
+ *   Natural/Dramatic     — The Artiste, formerly "The Artist"
  *
- * "Natural/Dramatic – The Artist" in the brief is spelled "The Artiste" in the
- * archetype's own document; using that spelling.
+ * If a source document shows a retired name, the document is out of date.
  */
 
 import { YANG_STYLES, YIN_STYLES, STYLE_MAPPING } from '@/data/quiz-data';

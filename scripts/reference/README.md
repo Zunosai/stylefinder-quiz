@@ -35,15 +35,17 @@ rather than `Shadow Side:`, `Words & Qualities`, a prose intro instead of
 string unless `<w:tab/>` is preserved as a separator. It has no Elements or
 Silhouettes section at all — those fields are legitimately empty.
 
-## Where the source documents disagree
+## Renamed archetypes
 
-The archetype's own description sheet wins over the summary lists, because it
-is the document the coach works from:
+Three archetypes were renamed over the years. Some older source documents still
+carry the retired name — when one does, the document is out of date, not the
+code. Current names confirmed by Jim on 2026-09-22:
 
-| Pairing | Summary lists | Archetype sheet | Used |
-|---|---|---|---|
-| Contemporary/Natural | The Green Gal | The Polished | **The Polished** |
-| Romantic/Sporty | The Enchantress (one-pager) | The Flirt | **The Flirt** |
-| Natural/Dramatic | The Artist | The Artiste | **The Artiste** |
+| Pairing | Current name | Retired name |
+|---|---|---|
+| Contemporary/Natural | **The Polished** | The Green Gal |
+| Romantic/Sporty | **The Flirt** | The Enchantress |
+| Natural/Dramatic | **The Artiste** | The Artist |
 
-Tests in `archetypes.test.ts` pin each of these so they cannot silently flip.
+Tests in `archetypes.test.ts` pin each of these, so re-extracting from a stale
+document fails rather than silently reintroducing an old name.
