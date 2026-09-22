@@ -1,4 +1,4 @@
-import { createClient } from '@supabase/supabase-js';
+import { createClient, type SupabaseClient } from '@supabase/supabase-js';
 import { QuizSubmission, StyleResult } from './types';
 
 // Supabase configuration
@@ -6,18 +6,46 @@ const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || '';
 const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || '';
 const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY || '';
 
-// Client for public operations (browser-safe)
-export const supabase = createClient(supabaseUrl, supabaseAnonKey);
+// Clients are built on first use, not at module scope. `createClient` throws
+// when the URL is absent, and route modules are imported during the Next.js
+// build's page-data collection — so an eager call fails the whole build in any
+// environment missing the variables, long before a request is ever served.
+let publicClient: SupabaseClient | null = null;
+let adminClient: SupabaseClient | null = null;
 
-// Client for server-side operations with elevated privileges
-export const supabaseAdmin = process.env.SUPABASE_SERVICE_ROLE_KEY
-  ? createClient(supabaseUrl, supabaseServiceKey, {
-      auth: {
-        autoRefreshToken: false,
-        persistSession: false
-      }
-    })
-  : null;
+function getSupabase(): SupabaseClient {
+  publicClient ??= createClient(supabaseUrl, supabaseAnonKey);
+  return publicClient;
+}
+
+function getSupabaseAdmin(): SupabaseClient | null {
+  if (!supabaseServiceKey || !supabaseUrl) return null;
+  adminClient ??= createClient(supabaseUrl, supabaseServiceKey, {
+    auth: {
+      autoRefreshToken: false,
+      persistSession: false
+    }
+  });
+  return adminClient;
+}
+
+/**
+ * The client to use for a server-side query: the service-role client when it
+ * is configured, otherwise the public one.
+ *
+ * Call this inside a function — never at module scope — so construction stays
+ * lazy.
+ */
+export function getDbClient(): SupabaseClient {
+  return getSupabaseAdmin() ?? getSupabase();
+}
+
+/** Whether a service-role client is available. */
+export function hasSupabaseAdmin(): boolean {
+  return Boolean(supabaseServiceKey && supabaseUrl);
+}
+
+export { getSupabase, getSupabaseAdmin };
 
 // Database types
 export interface DbQuizSubmission {
@@ -73,7 +101,7 @@ export async function saveQuizSubmission(
 ): Promise<{ success: boolean; submissionId?: string; error?: string }> {
   try {
     // Use admin client if available, otherwise regular client
-    const client = supabaseAdmin || supabase;
+    const client = getDbClient();
 
     // Extract metadata from request if available
     const ip_address = request?.headers?.get('x-forwarded-for') ||
@@ -155,7 +183,7 @@ export async function updateEmailStatus(
   error?: string
 ): Promise<void> {
   try {
-    const client = supabaseAdmin || supabase;
+    const client = getDbClient();
 
     await client
       .from('quiz_submissions')
@@ -180,7 +208,7 @@ export async function queueEmail(
   emailData: any
 ): Promise<{ success: boolean; error?: string }> {
   try {
-    const client = supabaseAdmin || supabase;
+    const client = getDbClient();
 
     const queueEntry: DbEmailQueue = {
       submission_id: submissionId,
@@ -217,7 +245,7 @@ export async function getRecentSubmissions(
   days: number = 7
 ): Promise<DbQuizSubmission[]> {
   try {
-    const client = supabaseAdmin || supabase;
+    const client = getDbClient();
 
     const fromDate = new Date();
     fromDate.setDate(fromDate.getDate() - days);
@@ -246,7 +274,7 @@ export async function getRecentSubmissions(
  */
 export async function getSubmissionById(id: string): Promise<DbQuizSubmission | null> {
   try {
-    const client = supabaseAdmin || supabase;
+    const client = getDbClient();
 
     const { data, error } = await client
       .from('quiz_submissions')
@@ -273,7 +301,7 @@ export async function searchSubmissionsByEmail(
   email: string
 ): Promise<DbQuizSubmission[]> {
   try {
-    const client = supabaseAdmin || supabase;
+    const client = getDbClient();
 
     const { data, error } = await client
       .from('quiz_submissions')
@@ -298,7 +326,7 @@ export async function searchSubmissionsByEmail(
  */
 export async function getPendingEmails(limit: number = 10): Promise<DbEmailQueue[]> {
   try {
-    const client = supabaseAdmin || supabase;
+    const client = getDbClient();
 
     const { data, error } = await client
       .from('email_queue')
@@ -330,7 +358,7 @@ export async function updateEmailQueueStatus(
   error?: string
 ): Promise<void> {
   try {
-    const client = supabaseAdmin || supabase;
+    const client = getDbClient();
 
     const updates: any = {
       status,
@@ -364,7 +392,7 @@ export async function isDatabaseConfigured(): Promise<boolean> {
   }
 
   try {
-    const client = supabaseAdmin || supabase;
+    const client = getDbClient();
     const { error } = await client
       .from('quiz_submissions')
       .select('id')
