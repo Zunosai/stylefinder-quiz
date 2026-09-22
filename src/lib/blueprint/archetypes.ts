@@ -7,7 +7,19 @@
  * Order matters: Classic/Whimsical (The Adventurer) and Whimsical/Classic
  * (The Spirited) are different archetypes. The first name is always Primary.
  *
- * Source: STYLEFINDER ID® SIGNATURE STYLE BLUEPRINT, pages 1–2.
+ * Source: the per-archetype reference documents, each of which states its own
+ * pairing and name. Those files are authoritative over the summary list in the
+ * Blueprint brief and over "The Archetypes" one-pager, which disagree with them
+ * in two places:
+ *
+ *   Contemporary/Natural — both list "The Green Gal"; the archetype's own
+ *   document is titled "The Polished". Using the document's name.
+ *
+ *   Romantic/Sporty — the one-pager lists "The Enchantress"; the archetype's
+ *   own document is titled "The Flirt", matching the brief. Using "The Flirt".
+ *
+ * "Natural/Dramatic – The Artist" in the brief is spelled "The Artiste" in the
+ * archetype's own document; using that spelling.
  */
 
 import { YANG_STYLES, YIN_STYLES, STYLE_MAPPING } from '@/data/quiz-data';
@@ -45,7 +57,7 @@ export const ARCHETYPES: Record<string, string> = {
   'Classic/Romantic': 'The Sentimental',
   'Classic/Whimsical': 'The Adventurer',
 
-  'Contemporary/Natural': 'The Green Gal',
+  'Contemporary/Natural': 'The Polished',
   'Contemporary/Delicate': 'The Cosmopolitan',
   'Contemporary/Romantic': 'The Superstar',
   'Contemporary/Whimsical': 'The Trendsetter',
@@ -56,7 +68,7 @@ export const ARCHETYPES: Record<string, string> = {
   'Sporty/Whimsical': 'The Playful Muse',
 
   // Yin primary, Yang secondary
-  'Natural/Dramatic': 'The Artist',
+  'Natural/Dramatic': 'The Artiste',
   'Delicate/Dramatic': 'The Primadonna',
   'Romantic/Dramatic': 'The Bohemian',
   'Whimsical/Dramatic': 'The Creative',

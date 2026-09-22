@@ -124,3 +124,20 @@ describe('every result the scoring can produce resolves to an archetype', () => 
     expect(unresolved).toEqual([]);
   });
 });
+
+describe('names contested between source documents', () => {
+  // Each archetype's own reference document states its pairing and name, and
+  // in three places it disagrees with the summary lists. These pin the
+  // resolution so a future edit cannot quietly flip one back.
+  it('uses The Polished, not The Green Gal, for Contemporary/Natural', () => {
+    expect(getArchetype('Contemporary', 'Natural')).toBe('The Polished');
+  });
+
+  it('uses the Artiste spelling for Natural/Dramatic', () => {
+    expect(getArchetype('Natural', 'Dramatic')).toBe('The Artiste');
+  });
+
+  it('uses The Flirt, not The Enchantress, for Romantic/Sporty', () => {
+    expect(getArchetype('Romantic', 'Sporty')).toBe('The Flirt');
+  });
+});

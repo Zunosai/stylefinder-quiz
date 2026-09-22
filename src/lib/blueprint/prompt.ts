@@ -11,6 +11,7 @@
  */
 
 import { getArchetype, energyOf, type StyleType } from './archetypes';
+import { STYLE_TYPE_REFERENCE, ARCHETYPE_REFERENCE } from './reference';
 
 export const BLUEPRINT_INSTRUCTIONS = `You write StyleFinder ID® Signature Style Blueprints.
 
@@ -37,6 +38,18 @@ The finished result should feel like one cohesive woman, not three StyleTypes la
 Use the 80/20/supporting percentages as a hierarchy of influence, not a mathematical formula that must appear literally in every recommendation.
 
 Where an archetype has been provided, use it as an additional lens for understanding the interaction between the Primary and Secondary StyleTypes. Do not allow the archetype to override the StyleFinder ID® itself.
+
+STYLEFINDER REFERENCE MATERIAL
+
+The request includes the StyleFinder system's own reference material for this client's StyleTypes and archetype — its vocabulary, colors, patterns, textures, silhouettes, shadow sides, style icons, and style statement.
+
+Treat that material as authoritative and ground the Blueprint in it. Draw the Color & Contrast, Textures & Fabrics, and Silhouettes & Shape guidance from the StyleTypes' documented colors, textures and silhouettes, weighted by the Primary/Secondary/Supporting hierarchy. Draw section 7's visibility patterns from the documented shadow sides rather than inventing new ones.
+
+Where the reference names style icons, prefer them for section 3 — they are the system's own reference women. You may add one of your own only if the named icons do not span enough range, and never contradict them.
+
+Where the archetype has a style statement, let it inform section 4 without simply repeating it verbatim; her statement should read as written for her.
+
+The reference is vocabulary and raw material, not sentences to copy. Write original prose that expresses it — never paste a comma-separated list into the Blueprint as if it were a sentence.
 
 Produce the following nine sections, in order.
 
@@ -217,7 +230,56 @@ export function buildBlueprintRequest(subject: BlueprintSubject): string {
     lines.push(`Primary + Secondary Archetype: ${archetype}`);
   }
 
-  return lines.join('\n');
+  lines.push('', 'STYLEFINDER REFERENCE MATERIAL', '');
+
+  for (const [role, type] of [
+    ['PRIMARY', primary],
+    ['SECONDARY', secondary],
+    ['SUPPORTING', supporting],
+  ] as const) {
+    lines.push(...styleTypeBlock(role, type));
+  }
+
+  const ref = archetype ? ARCHETYPE_REFERENCE[`${primary}/${secondary}`] : undefined;
+  if (ref) {
+    lines.push(`ARCHETYPE — ${ref.name} (${primary}/${secondary})`);
+    if (ref.descriptor) lines.push(`  Descriptor: ${ref.descriptor}`);
+    if (ref.styleIcons.length) {
+      lines.push(`  Style icons: ${ref.styleIcons.join(', ')}`);
+    }
+    if (ref.elements.length) {
+      lines.push(`  Elements of style: ${ref.elements.join(', ')}`);
+    }
+    if (ref.shadowSide.length) {
+      lines.push(`  Shadow side: ${ref.shadowSide.join(', ')}`);
+    }
+    if (ref.statement) lines.push(`  Style statement: "${ref.statement}"`);
+    lines.push('');
+  }
+
+  return lines.join('\n').trimEnd();
+}
+
+/** One StyleType's reference card, as prompt lines. */
+function styleTypeBlock(role: string, type: StyleType): string[] {
+  const ref = STYLE_TYPE_REFERENCE[type];
+  if (!ref) return [];
+
+  const out = [`${role} — ${type} (${ref.energy})`];
+  const field = (label: string, value: string) => {
+    if (value) out.push(`  ${label}: ${value}`);
+  };
+
+  field('Words and qualities', ref.words);
+  field('Most important', ref.mostImportant);
+  field('Elements of style', ref.elements);
+  field('Colors', ref.colors);
+  field('Patterns', ref.patterns);
+  field('Textures', ref.textures);
+  field('Silhouettes', ref.silhouettes);
+  field('Shadow side', ref.shadowSide);
+  out.push('');
+  return out;
 }
 
 /**
