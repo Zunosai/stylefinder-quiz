@@ -11,7 +11,7 @@ import { ButtonLoading } from '@/components/SkeletonLoader';
  * wording change cannot retroactively redefine what past takers agreed to.
  * BUMP THIS whenever the privacy notice text changes.
  */
-export const CONSENT_VERSION = '2026-09-22-blueprint-ai';
+export const CONSENT_VERSION = '2026-09-23-no-retailer-ask';
 
 const userInfoSchema = z.object({
   userName: z.string()
@@ -21,9 +21,12 @@ const userInfoSchema = z.object({
   userEmail: z.string()
     .email('Please enter a valid email address')
     .max(100, 'Email must be less than 100 characters'),
-  // Opt-OUT: defaults to true so the box is pre-checked, and she can clear it.
-  // Flip `defaultValues.shareWithRetailers` to false below for opt-IN instead.
-  shareWithRetailers: z.boolean(),
+  // Retailer sharing is not asked on this form. The field stays in the schema
+  // as optional so the submission type is unchanged, but nothing sets it —
+  // leaving it undefined, which persists as NULL ("never asked"). Do not give
+  // it a default: a default would record consent she was never asked for.
+  // See migration 002.
+  shareWithRetailers: z.boolean().optional(),
 });
 
 type UserInfoFormData = z.infer<typeof userInfoSchema>;
@@ -43,9 +46,7 @@ export default function UserInfoForm({ onSubmit, initialValues }: UserInfoFormPr
   } = useForm<UserInfoFormData>({
     resolver: zodResolver(userInfoSchema),
     mode: 'onChange',
-    // Pre-checked (opt-out). Set to false to make retailer sharing opt-IN —
-    // the more conservative posture, at some cost to consent rate.
-    defaultValues: { shareWithRetailers: true, ...(initialValues || {}) }
+    defaultValues: { ...(initialValues || {}) }
   });
 
   const onFormSubmit = async (data: UserInfoFormData) => {
@@ -125,28 +126,6 @@ export default function UserInfoForm({ onSubmit, initialValues }: UserInfoFormPr
             )}
           </div>
 
-          {/* Retailer sharing consent */}
-          <div className="bg-rose-50 rounded-lg p-4">
-            <label htmlFor="shareWithRetailers" className="flex items-start cursor-pointer">
-              <input
-                {...register('shareWithRetailers')}
-                type="checkbox"
-                id="shareWithRetailers"
-                className="mt-0.5 mr-3 h-4 w-4 flex-shrink-0 rounded border-gray-300 text-rose-600 focus:ring-rose-500"
-                disabled={isSubmitting}
-              />
-              <span className="text-xs text-gray-700">
-                <span className="block font-medium mb-1">
-                  Get recommendations from boutiques you shop
-                </span>
-                Share my StyleFinder ID® with boutiques I already shop with, so they can
-                show me pieces suited to my style. They only see my style result — never
-                my quiz answers. Uncheck this and your results stay between you and your
-                style coach.
-              </span>
-            </label>
-          </div>
-
           {/* Privacy Notice */}
           <div className="bg-gray-50 rounded-lg p-4">
             <div className="flex items-start">
@@ -158,11 +137,9 @@ export default function UserInfoForm({ onSubmit, initialValues }: UserInfoFormPr
                 <p>
                   Your information is used for this assessment and shared with your
                   personal style coach for guidance. We use a secure AI service to help
-                  write your personalized Style Blueprint from your results. If you opt
-                  in above, your style result is also made available to boutiques you
-                  already shop with — never to businesses you have no relationship
-                  with, and we never sell your data. You can withdraw consent at any
-                  time by contacting us.
+                  write your personalized Style Blueprint from your results. We never
+                  sell your data. You can withdraw consent at any time by contacting
+                  us.
                 </p>
               </div>
             </div>

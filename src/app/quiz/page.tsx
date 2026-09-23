@@ -79,7 +79,8 @@ export default function QuizPage() {
   const handleUserInfoSubmit = (userInfo: {
     userName: string;
     userEmail: string;
-    shareWithRetailers: boolean;
+    // Not asked on the form; stays undefined so it persists as NULL.
+    shareWithRetailers?: boolean;
   }) => {
     const updatedData = {
       ...quizData,
@@ -140,8 +141,9 @@ export default function QuizPage() {
       userName: quizData.userName!,
       userEmail: quizData.userEmail!,
       timestamp: new Date(),
-      // Carried from the consent checkbox; stays undefined if never answered so
-      // the server records NULL ("never asked") rather than a fabricated false.
+      // The form no longer asks about retailer sharing, so this is undefined
+      // and the server records NULL ("never asked") — never a fabricated false
+      // or true. See migration 002.
       shareWithRetailers: quizData.shareWithRetailers,
       consentVersion: quizData.consentVersion,
       referralStoreId: quizData.referralStoreId,
