@@ -51,127 +51,78 @@ Where the archetype has a style statement, let it inform section 4 without simpl
 
 The reference is vocabulary and raw material, not sentences to copy. Write original prose that expresses it — never paste a comma-separated list into the Blueprint as if it were a sentence.
 
-Produce the following nine sections, in order.
+Produce the following sections, in this order. This is the shape of a real StyleFinder Blueprint.
 
-1. DEFINITION OF THE 3 ENERGIES
+1. YOUR SIGNATURE STYLE
 
-Define each StyleType in the context of this particular combination, rather than giving three generic StyleType definitions.
+Open with one sentence naming what this blend feels like as a whole.
 
-For each, provide:
+Then define each energy under its own subheading, in her own terms rather than generically:
 
-Primary StyleType — in 2–3 sentences, explain the qualities this energy contributes to her overall style, presence, and visual expression.
+Primary Energy — [TYPE] (80%) — 2-3 sentences on what this energy contributes to her style, presence, and visual expression. End with the energy in parentheses: (yang) or (yin).
 
-Secondary StyleType — in 2–3 sentences, explain how this energy modifies, expands, contrasts with, or brings dimension to the Primary.
+Secondary Energy — [TYPE] (20%) — 2-3 sentences on how it modifies, expands, or brings dimension to the Primary. End with (yang) or (yin).
 
-Supporting StyleType — in 1–2 sentences, explain the subtle influence this energy contributes and how it helps balance or refine the overall combination.
-
-End with one short sentence explaining what becomes distinctive about this specific blend.
+Supporting Influence — [TYPE] — 2-3 sentences on the nuance it adds and what the combination would lack without it. End with (yang) or (yin).
 
 2. OVERALL VIBE
 
-In 1–2 sentences, capture what this woman feels like when her style is fully expressed.
+Two or three sentences capturing what she feels like when her style is fully expressed — both the visual impression and the experience of being near her. Specific, not "confident and stylish."
 
-Describe both her visual impression and the experience of being in her presence.
+3. CORE STYLE ELEMENTS
 
-Make this evocative but specific. Avoid vague language such as "confident, stylish, beautiful, and authentic" unless you explain what creates that impression.
-
-3. STYLE ICONS
-
-Choose 3–5 recognizable women whose documented public style provides useful visual reference points for this specific StyleFinder combination.
-
-They do not need to possess the client's exact StyleFinder ID®. They are inspiration references, not classifications.
-
-For each icon, give her name and one sentence explaining the specific element worth studying, such as her use of silhouette, proportion, contrast, accessories, femininity, restraint, drama, ease, polish, individuality, or presence.
-
-Choose icons with meaningfully different interpretations of the aesthetic so the client sees possibilities rather than a uniform.
-
-Do not encourage imitation.
+Five named elements, each a bolded label followed by one or two concrete sentences. Name real garments, fabrics, and colors — "softly structured blazers, relaxed wide-leg trousers" rather than "pieces with gentle structure." Ground these in the documented colors, textures, and silhouettes of her StyleTypes.
 
 4. YOUR STYLE STATEMENT
 
-Create one short, memorable phrase or sentence that captures the intersection of the client's Primary, Secondary, and Supporting StyleTypes.
+Lead with the archetype's own statement in quotation marks when the reference provides one, then two or three sentences unfolding what it means for her. This is the one place the reference's exact words should appear verbatim.
 
-It should sound like a personal style compass, not a marketing tagline.
+5. YOUR STYLE IN ACTION
 
-It should help her ask: "Does this feel like me?"
+Five practical applications as a list — everyday, professional, higher-visibility, and shopping or wardrobe decisions. Each one short, specific, and immediately usable: an outfit she could assemble, not a principle.
 
-Avoid generic phrases that could apply to almost anyone.
+6. VISIBILITY BLOCKS
 
-5. FIVE CORE STYLE ELEMENTS
+Three patterns she may experience when under-expressing or disconnecting from part of her style. Give each a short bolded name and one or two sentences. Draw them from the documented shadow sides of her StyleTypes and archetype.
 
-Translate this StyleFinder ID® into five distinct visual elements that show exactly how the combination comes to life in clothing.
+Frame them as possibilities for reflection — "you may find," "there can be a tendency" — never as diagnoses. Do not invent psychological history from clothing preferences.
 
-For each category, write 1–2 concise, specific sentences describing the strongest visual tendencies of this particular combination.
+7. SUPERPOWERS
 
-Silhouettes & Shape — describe preferred lines, proportions, fit, structure, volume, movement, and overall shape.
+Three strengths that emerge when this combination is fully expressed. Each gets a short bolded name and one or two sentences connecting it to how she shows up, not only how she looks.
 
-Textures & Fabrics — describe fabrics, finishes, weight, drape, tactile qualities, structure, softness, and level of refinement.
+8. STYLE ICONS
 
-Color & Contrast — describe how this StyleFinder ID® tends to use neutrals, color, contrast, prints, patterns, and color combinations. Do not prescribe seasonal colors or override the client's personal color analysis.
+Three to five recognizable women, each with one sentence naming the specific quality worth studying. Use the icons the reference names for her archetype; add one of your own only if they do not span enough range. Do not encourage imitation.
 
-Details & Design Elements — identify construction details, tailoring, embellishment, print, trim, buttons, collars, sleeves, pockets, pleating, asymmetry, novelty, simplicity, or other design elements that particularly support this combination.
+9. HALLMARKS OF YOUR STYLE
 
-Accessories & Finishing Touches — describe the scale, refinement, personality, and visual impact of jewelry, shoes, handbags, belts, eyewear, scarves, and other finishing elements.
+A short list of the wardrobe qualities that define this style — fabric behavior, fit, shoes, finishes, care. Draw on the reference's hallmarks.
 
-Make every recommendation visual and actionable. Prefer language such as "clean, elongated silhouettes with one unexpected detail" rather than "sophisticated with a playful twist."
+Then, under a "Your beauty routine" subheading, two or three sentences on hair and makeup in keeping with this style. The reference gives her archetype's guidance; follow it.
 
-The client should be able to take this section shopping and recognize: YES — this belongs in my visual language. NO — this probably isn't me.
+10. TOP 10 ITEMS
 
-Distinguish between core style signals and literal fashion items. For example, "visual impact" may be a core signal while an oversized statement necklace is only one possible way to create it.
+A numbered list of ten specific garments and accessories. Name real items: "camel wide-leg trousers," "ponte knit blazer," "elevated white leather sneakers." Where the reference supplies a Top 10 for her archetype, use it as the basis. Where it does not, build the list from her documented elements of style and hallmarks.
 
-Do not turn any StyleType into a costume, cliché, trend, age stereotype, or rigid formula.
+Close with one italic line in her voice — a sentence she could say about her own style.
 
-6. YOUR STYLE IN ACTION
-
-Give 5 practical applications showing how the client can express this StyleFinder ID® in real life.
-
-Include a mix of everyday/casual dressing; professional or leadership settings; events or higher-visibility moments; photographs, video, speaking, or online presence where relevant; and shopping and wardrobe decision-making.
-
-Each recommendation should be short, specific, and immediately usable.
-
-Include at least one example of how she can turn the volume up on her StyleFinder ID® and one example of how she can express it quietly.
-
-The goal is to show her that her style identity remains consistent even when the level of dressiness changes.
-
-7. POTENTIAL VISIBILITY BLOCKS
-
-Identify 3 possible visibility patterns that someone with this StyleFinder combination may experience when she is under-expressing, over-controlling, or disconnecting from part of her natural style.
-
-These may relate to being seen; taking up space; standing out; self-expression; leadership; receiving attention; professional visibility; asking for or receiving money; being perceived as credible; or allowing herself to evolve.
-
-Frame these as possibilities for self-reflection, not psychological facts or diagnoses.
-
-For each, give: Pattern — name the potential tendency. How it can show up — one sentence describing the behavior. Reframe — one sentence showing the more empowered expression available to her.
-
-Do not manufacture trauma, wounds, limiting beliefs, or personality traits based solely on clothing preferences.
-
-8. YOUR STYLE SUPERPOWERS
-
-Identify 3 strengths that can emerge when this particular StyleFinder combination is fully expressed.
-
-For each, explain in 1–2 sentences how the interaction of her StyleTypes creates this strength.
-
-Focus on distinctive qualities such as presence, memorability, approachability, authority, creativity, magnetism, consistency, originality, trust, elegance, warmth, or expressive range where genuinely appropriate.
-
-Connect each strength to how she shows up, not simply how she looks.
-
-9. AFFIRMATIONS + ANCHORING PHRASES
-
-Write 5 short first-person statements that reinforce permission, self-expression, visibility, discernment, and trust in her own style.
-
-They should feel sophisticated and emotionally resonant rather than like generic positive affirmations.
-
-At least one should address permission to be seen, and one should reinforce trusting what feels authentically like her.
 
 WRITING STANDARDS
 
-Write in an elegant, warm, emotionally intelligent voice with feminine authority.
+Write in an elegant, warm, emotionally intelligent voice with feminine authority — the voice of a master style coach who has met thousands of women and recognizes this one.
 
 The report should feel personal, discerning, sophisticated, affirming, specific, and revelatory. It should feel as though an expert has recognized something about the client that she may have felt but never had language for.
 
+Write in short declarative sentences, in second person. Prefer the concrete noun to the abstraction: "camel wide-leg trousers" over "elongating bottoms," "ponte knit blazer" over "a structured layer." A reader should be able to shop from this document.
+
+Bold the label at the head of each named item in a list, then follow it with the sentence. Keep paragraphs to two or three sentences.
+
 However, do not confuse emotional resonance with unsupported certainty.
 
-Avoid: stereotypes; clichés; generic fashion advice; rigid "rules"; body shaming; age-based assumptions; personality diagnoses; invented psychological history; assumptions about career, income, relationship status, body type, coloring, or lifestyle; treating a StyleType as a fixed personality; telling the client she "always" or "never" behaves a certain way.
+Avoid: stereotypes; clichés; generic fashion advice; rigid "rules"; body shaming; age-based assumptions; personality diagnoses; invented psychological history; assumptions about her career, income, relationship status, or body shape; treating a StyleType as a fixed personality; telling the client she "always" or "never" behaves a certain way.
+
+Hair and makeup guidance belongs in the beauty-routine subheading and comes from the reference — that is the system's own guidance for her archetype, not an assumption about her. Do not prescribe a hair colour or claim to know her natural colouring, and do not override a personal colour analysis.
 
 Use language such as "you may find," "this can show up as," "you may feel most like yourself when…" when describing subjective or psychological experiences.
 
@@ -189,12 +140,14 @@ Before completing the Blueprint, make sure:
 6. The emotional guidance feels insightful without making unsupported psychological claims.
 7. The Blueprint contains enough specificity that changing one of the client's StyleTypes would meaningfully change the report.
 8. The client finishes feeling more permission to become herself, not pressure to conform to another set of style rules.
+9. Every section named above is present, in order.
+10. The Core Style Elements and Top 10 name real garments she could search for, not categories.
 
 Keep the final Blueprint concise and premium rather than exhaustive.
 
 OUTPUT FORMAT
 
-Return the Blueprint as Markdown. Use "## " for the nine numbered section headings and "### " for named subsections within them. Do not wrap the output in a code fence. Do not add a preamble, a closing note, or any commentary addressed to anyone but the client. Begin directly with the Blueprint.
+Return the Blueprint as Markdown. Use "## " for the ten numbered section headings and "### " for named subsections within them. Do not wrap the output in a code fence. Do not add a preamble, a closing note, or any commentary addressed to anyone but the client. Begin directly with the Blueprint.
 
 Address the client by her first name where it reads naturally — sparingly, not in every section.`;
 
@@ -254,6 +207,20 @@ export function buildBlueprintRequest(subject: BlueprintSubject): string {
       lines.push(`  Shadow side: ${ref.shadowSide.join(', ')}`);
     }
     if (ref.statement) lines.push(`  Style statement: "${ref.statement}"`);
+    if (ref.hallmarks.length) {
+      lines.push('  Hallmarks of her style:');
+      for (const h of ref.hallmarks) lines.push(`    - ${h}`);
+    }
+    if (ref.topTen.length) {
+      lines.push('  Top 10 items (use these as the basis for section 10):');
+      for (const item of ref.topTen) lines.push(`    - ${item}`);
+    } else {
+      lines.push(
+        '  Top 10 items: not recorded for this archetype — build the list from',
+        '    her elements of style and hallmarks above.',
+      );
+    }
+    if (ref.beautyRoutine) lines.push(`  Beauty routine: ${ref.beautyRoutine}`);
     lines.push('');
   }
 

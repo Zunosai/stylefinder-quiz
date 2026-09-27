@@ -73,6 +73,25 @@ describe('archetype reference sheets', () => {
     }
   });
 
+  it('carries hallmarks and a beauty routine for every archetype', () => {
+    const missing: string[] = [];
+    for (const [key, ref] of Object.entries(ARCHETYPE_REFERENCE)) {
+      if (!ref.hallmarks.length) missing.push(`${key} hallmarks`);
+      if (!ref.beautyRoutine) missing.push(`${key} beautyRoutine`);
+    }
+    // Two sheets set Hallmarks only as an image; those are known gaps.
+    expect(missing.length).toBeLessThanOrEqual(2);
+  });
+
+  it('supplies a Top 10 for most archetypes', () => {
+    const withList = Object.values(ARCHETYPE_REFERENCE).filter(
+      (r) => r.topTen.length > 0,
+    );
+    // Eight sheets carry the Top 10 only as an image; the prompt tells the
+    // model to build the list from elements and hallmarks in those cases.
+    expect(withList.length).toBeGreaterThanOrEqual(24);
+  });
+
   it('carries a style statement for every archetype', () => {
     const without = Object.entries(ARCHETYPE_REFERENCE)
       .filter(([, ref]) => !ref.statement)
@@ -124,6 +143,12 @@ describe('the request sent for a client', () => {
   it("includes the archetype's own icons and statement", () => {
     expect(request).toContain('Diane Keaton');
     expect(request).toContain('Classic with a Twist');
+  });
+
+  it("includes the archetype's hallmarks, Top 10 and beauty routine", () => {
+    expect(request).toContain('Hallmarks of her style:');
+    expect(request).toContain('Beauty routine:');
+    expect(request).toMatch(/Top 10 items/);
   });
 
   it('omits the archetype block for a same-energy pairing', () => {

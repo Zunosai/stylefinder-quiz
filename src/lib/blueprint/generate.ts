@@ -15,6 +15,7 @@ import {
   type BlueprintSubject,
 } from './prompt';
 import { getArchetype, asStyleType, type StyleType } from './archetypes';
+import { assembleBlueprint } from './boilerplate';
 import type { StyleResult } from '../types';
 
 export const BLUEPRINT_MODEL = 'claude-opus-5';
@@ -23,8 +24,10 @@ export const BLUEPRINT_MODEL = 'claude-opus-5';
 const MAX_TOKENS = 16000;
 
 export interface GeneratedBlueprint {
-  /** The Blueprint itself, as Markdown. */
+  /** The delivered document: fixed front matter + body + back matter. */
   markdown: string;
+  /** Just the generated sections, without the boilerplate. */
+  body: string;
   primary: StyleType;
   secondary: StyleType;
   supporting: StyleType;
@@ -153,7 +156,10 @@ export async function generateBlueprint(
     }
 
     return {
-      markdown,
+      // Store the assembled document, so the email, the page and the PDF all
+      // render the same thing the coach approved.
+      markdown: assembleBlueprint(subject.clientFirstName, markdown),
+      body: markdown,
       primary: subject.primary,
       secondary: subject.secondary,
       supporting: subject.supporting,
